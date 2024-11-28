@@ -4,10 +4,14 @@ title_html = """
 <h1 style='text-align: center;'>
     <span style='color: #71c6c6;'>G</span>
     <span style='color: gray;'>allery for </span>
-    <span style='color: yellow;'>N</span>
+    <span style='color: #71c6c6;'>N</span>
     <span style='color: gray;'>urturing </span>
-    <span style='color: orange;'>U</span>
-    <span style='color: gray;'>pcoming English Teachers</span>
+    <span style='color: #71c6c6;'>U</span>
+    <span style='color: gray;'>pcoming </span>
+    <span style='color: #f9d34c;'>E</span>
+    <span style='color: gray;'>nglish </span>
+    <span style='color: #81d38c;'>T</span>
+    <span style='color: gray;'>eachers</span>
 </h1>
 """
 
