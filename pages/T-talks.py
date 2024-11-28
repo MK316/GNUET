@@ -25,14 +25,14 @@ def load_data(url):
         return pd.DataFrame()
 
 # Function to play audio
-def play_audio(text):
+def play_audio(text, key):
     tts = gTTS(text, lang='en')
     buffer = BytesIO()
     tts.write_to_fp(buffer)
     buffer.seek(0)
     b64 = base64.b64encode(buffer.read()).decode()
     href = f'<audio controls src="data:audio/mp3;base64,{b64}"></audio>'
-    st.markdown(href, unsafe_allow_html=True)
+    st.markdown(href, unsafe_allow_html=True, key=key)
 
 # Main app
 def main():
@@ -62,22 +62,12 @@ def main():
             if not chosen_row.empty:
                 expression = chosen_row['Expression'].iat[0]
                 st.write(expression)
-                play_audio(expression)
+                audio_key = f'audio_{key}_{index}_{mode}'
+                play_audio(expression, audio_key)
 
                 if st.button("Next", key=f'next_{key}'):
-                    if mode == 'Random':
-                        chosen_row = data.sample().reset_index(drop=True)
-                    else:
-                        index = st.session_state[f'index_{key}']
-                        if index >= len(data):
-                            index = 0
-                        chosen_row = data.iloc[[index]].reset_index(drop=True)
-                        expression = chosen_row['Expression'].iat[0]
-                        st.session_state[f'index_{key}'] = index + 1
-                        st.write(expression)
-                        play_audio(expression)
-            else:
-                st.write("No data available.")
+                    st.session_state[f'index_{key}'] += 1  # Increment index to update the state
+                    st.experimental_rerun()  # Rerun the script to refresh state
 
 if __name__ == "__main__":
     main()
