@@ -17,8 +17,12 @@ urls = {
 # Function to load data from a URL
 def load_data(url):
     response = requests.get(url)
-    data = pd.read_csv(BytesIO(response.content))
-    return data
+    if response.status_code == 200:
+        data = pd.read_csv(BytesIO(response.content))
+        return data
+    else:
+        st.error(f"Failed to load data from {url}. HTTP status: {response.status_code}")
+        return pd.DataFrame()
 
 # Function to play audio
 def play_audio(text):
@@ -48,29 +52,32 @@ def main():
             index = st.session_state.get(f'index_{key}', 0)
 
             if mode == 'Random':
-                chosen_row = data.sample()
+                chosen_row = data.sample().reset_index(drop=True)
             else:
                 if index >= len(data):
                     index = 0
-                chosen_row = data.iloc[index]
+                chosen_row = data.iloc[[index]].reset_index(drop=True)
                 st.session_state[f'index_{key}'] = index + 1
 
-            expression = chosen_row['Expression'].values[0]
-            st.write(expression)
-            play_audio(expression)
+            if not chosen_row.empty:
+                expression = chosen_row['Expression'].iat[0]
+                st.write(expression)
+                play_audio(expression)
 
-            if st.button("Next", key=f'next_{key}'):
-                if mode == 'Random':
-                    chosen_row = data.sample()
-                else:
-                    index = st.session_state[f'index_{key}']
-                    if index >= len(data):
-                        index = 0
-                    chosen_row = data.iloc[index]
-                    expression = chosen_row['Expression'].values[0]
-                    st.session_state[f'index_{key}'] = index + 1
-                    st.write(expression)
-                    play_audio(expression)
+                if st.button("Next", key=f'next_{key}'):
+                    if mode == 'Random':
+                        chosen_row = data.sample().reset_index(drop=True)
+                    else:
+                        index = st.session_state[f'index_{key}']
+                        if index >= len(data):
+                            index = 0
+                        chosen_row = data.iloc[[index]].reset_index(drop=True)
+                        expression = chosen_row['Expression'].iat[0]
+                        st.session_state[f'index_{key}'] = index + 1
+                        st.write(expression)
+                        play_audio(expression)
+            else:
+                st.write("No data available.")
 
 if __name__ == "__main__":
     main()
