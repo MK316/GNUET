@@ -49,7 +49,8 @@ def main():
             data = data_stores[key]
 
             mode = st.radio("Choose display mode:", ('Ordered', 'Random'), key=f'mode_{key}')
-            index = st.session_state.get(f'index_{key}', 0)
+            index_key = f'index_{key}'
+            index = st.session_state.get(index_key, 0)
 
             if mode == 'Random':
                 chosen_row = data.sample().reset_index(drop=True)
@@ -57,7 +58,7 @@ def main():
                 if index >= len(data):
                     index = 0
                 chosen_row = data.iloc[[index]].reset_index(drop=True)
-                st.session_state[f'index_{key}'] = index + 1
+                st.session_state[index_key] = index + 1
 
             if not chosen_row.empty:
                 expression = chosen_row['Expression'].iat[0]
@@ -65,8 +66,9 @@ def main():
                 play_audio(expression)
 
                 if st.button("Next", key=f'next_{key}'):
-                    st.session_state[f'index_{key}'] += 1  # Increment index to update the state
-                    st.experimental_rerun()  # Rerun the script to refresh state
+                    st.session_state[index_key] += 1  # Increment index to update the state
+                    # Use the following line to refresh only the necessary parts or manage states more granularly
+                    # st.write or st.empty to update parts of your app instead of rerunning everything
 
 if __name__ == "__main__":
     main()
