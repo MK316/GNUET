@@ -22,4 +22,4 @@ st.caption("Welcome to the Gallery for Nurturing Upcoming English Teachers (GNU-
 st.write("In preparation (since Nov.28, 2024)")
 
 # Image placed at the bottom of the page
-st.image("https://github.com/MK316/GNUET/blob/main/images/bg3.png")
+st.image("https://github.com/MK316/GNUET/raw/main/images/bg3.png")
