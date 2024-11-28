@@ -31,7 +31,7 @@ def play_audio(text):
     tts.write_to_fp(buffer)
     buffer.seek(0)
     b64 = base64.b64encode(buffer.read()).decode()
-    href = f'<audio controls src="data:audio/mp3;base64,{b64}" autoplay>'
+    href = f'<audio controls src="data:audio/mp3;base64,{b64}"></audio>'
     st.markdown(href, unsafe_allow_html=True)
 
 # Main app
