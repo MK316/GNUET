@@ -36,7 +36,7 @@ def play_audio(text):
 
 # Main app
 def main():
-    st.title("Multipage App with Multiple Tabs and Audio")
+    st.title("Teacher talks")
     
     tab_keys = ["Opening", "Objectives", "Feedback", "Closing"]
     tabs = st.tabs(tab_keys)
