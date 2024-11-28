@@ -2,11 +2,11 @@ import streamlit as st
 
 title_html = """
 <h1 style='text-align: center;'>
-    <span style='color: gray;'>G</span>
+    <span style='color: green;'>G</span>
     <span style='color: gray;'>allery for </span>
-    <span style='color: gray;'>N</span>
+    <span style='color: yellow;'>N</span>
     <span style='color: gray;'>urturing </span>
-    <span style='color: gray;'>U</span>
+    <span style='color: orange;'>U</span>
     <span style='color: gray;'>pcoming English Teachers</span>
 </h1>
 """
