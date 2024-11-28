@@ -2,7 +2,7 @@ import streamlit as st
 
 title_html = """
 <h1 style='text-align: center;'>
-    <span style='color: green;'>G</span>
+    <span style='color: #71c6c6;'>G</span>
     <span style='color: gray;'>allery for </span>
     <span style='color: yellow;'>N</span>
     <span style='color: gray;'>urturing </span>
