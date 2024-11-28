@@ -8,10 +8,10 @@ import requests
 
 # URLs for each tab's data
 urls = {
-    "Opening": "http://example.com/opening_data.csv",
-    "Objectives": "http://example.com/objectives_data.csv",
-    "Feedback": "http://example.com/feedback_data.csv",
-    "Closing": "http://example.com/closing_data.csv"
+    "Opening": "https://raw.githubusercontent.com/MK316/GNUET/refs/heads/main/data/t-talks01.csv",
+    "Objectives": "https://raw.githubusercontent.com/MK316/GNUET/refs/heads/main/data/t-talks01.csv",
+    "Feedback": "https://raw.githubusercontent.com/MK316/GNUET/refs/heads/main/data/t-talks01.csv",
+    "Closing": "https://raw.githubusercontent.com/MK316/GNUET/refs/heads/main/data/t-talks01.csv"
 }
 
 # Function to load data from a URL
