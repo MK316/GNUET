@@ -25,14 +25,14 @@ def load_data(url):
         return pd.DataFrame()
 
 # Function to play audio
-def play_audio(text, key):
+def play_audio(text):
     tts = gTTS(text, lang='en')
     buffer = BytesIO()
     tts.write_to_fp(buffer)
     buffer.seek(0)
     b64 = base64.b64encode(buffer.read()).decode()
     href = f'<audio controls src="data:audio/mp3;base64,{b64}"></audio>'
-    st.markdown(href, unsafe_allow_html=True, key=key)
+    st.markdown(href, unsafe_allow_html=True)
 
 # Main app
 def main():
@@ -62,8 +62,7 @@ def main():
             if not chosen_row.empty:
                 expression = chosen_row['Expression'].iat[0]
                 st.write(expression)
-                audio_key = f'audio_{key}_{index}_{mode}'
-                play_audio(expression, audio_key)
+                play_audio(expression)
 
                 if st.button("Next", key=f'next_{key}'):
                     st.session_state[f'index_{key}'] += 1  # Increment index to update the state
